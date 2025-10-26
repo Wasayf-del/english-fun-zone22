@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Fun Zone 🎉🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 50%, #fff0f5 100%);
+            min-height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            color: #6b73ff;
+            text-shadow: 3px 3px 0px #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #4ecdc4;
+            text-shadow: 2px 2px 0px #fff;
+            margin-bottom: 20px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .game-box {
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 4px solid transparent;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .game-box:nth-child(1) {
+            background: linear-gradient(135deg, #a8b5ff 0%, #c4b5fd 100%);
+        }
+
+        .game-box:nth-child(2) {
+            background: linear-gradient(135deg, #fbb6ce 0%, #f9a8d4 100%);
+        }
+
+        .game-box:nth-child(3) {
+            background: linear-gradient(135deg, #7dd3fc 0%, #a5f3fc 100%);
+        }
+
+        .game-box:nth-child(4) {
+            background: linear-gradient(135deg, #86efac 0%, #a7f3d0 100%);
+        }
+
+        .game-box:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: #fff;
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .credits {
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .credits h3 {
+            color: #6b73ff;
+            margin-bottom: 10px;
+        }
+
+        .credits p {
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .game-screen {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #6b73ff;
+        }
+
+        .back-btn {
+            background: #6b73ff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5b63ff;
+            transform: scale(1.05);
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .question-image {
+            width: 200px;
+            height: 200px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            border: 3px solid #e0e7ff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .option-btn {
+            background: #7dd3fc;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: #0ea5e9;
+            transform: scale(1.05);
+        }
+
+        .option-btn.correct {
+            background: #86efac;
+        }
+
+        .option-btn.incorrect {
+            background: #fca5a5;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .final-score {
+            text-align: center;
+            background: linear-gradient(135deg, #86efac, #6ee7b7);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .final-score h2 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+        }
+
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .column-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6b73ff;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(107, 115, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .words-column, .images-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .word-item {
+            background: #7dd3fc;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .image-item {
+            background: #fbb6ce;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .word-item:hover, .image-item:hover {
+            transform: scale(1.05);
+        }
+
+        .word-item.selected {
+            border-color: #6b73ff;
+            background: #6b73ff;
+        }
+
+        .image-item.matched {
+            background: #86efac;
+        }
+
+        .word-item.matched {
+            background: #86efac;
+        }
+
+        .scramble-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .scrambled-word {
+            font-size: 2rem;
+            color: #6b73ff;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .word-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5rem;
+            border: 3px solid #7dd3fc;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            background: #7dd3fc;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #0ea5e9;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .result-message.correct {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .result-message.incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: #7dd3fc;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card.flipped {
+            background: white;
+            color: #333;
+            border-color: #7dd3fc;
+        }
+
+        .memory-card.matched {
+            background: #86efac;
+            color: white;
+        }
+
+        .next-btn {
+            background: #6b73ff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .next-btn:hover {
+            background: #5b63ff;
+        }
+
+        .level-selection {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .level-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .level-btn {
+            padding: 25px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-btn.easy {
+            background: linear-gradient(135deg, #86efac, #6ee7b7);
+            box-shadow: 0 8px 25px rgba(134, 239, 172, 0.3);
+        }
+
+        .level-btn.medium {
+            background: linear-gradient(135deg, #fbbf24, #fcd34d);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
+        }
+
+        .level-btn.hard {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        .level-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .level-details {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            opacity: 0.9;
+            line-height: 1.3;
+        }
+
+        .level-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .level-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #fff;
+            color: #333;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .level-description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .matching-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="main-screen">
+            <div class="header">
+                <div class="logo">English Fun Zone 🎉🎉</div>
+                <div class="subtitle">Learn English the Fun Way!</div>
+            </div>
+
+            <div class="games-grid">
+                <div class="game-box" onclick="startGame('quiz')">
+                    <div class="game-icon">🧠</div>
+                    <div class="game-title">Multiple Choice Quiz</div>
+                    <div class="game-description">Answer questions by choosing the right option!</div>
+                </div>
+
+                <div class="game-box" onclick="startGame('matching')">
+                    <div class="game-icon">🔗</div>
+                    <div class="game-title">Matching Game</div>
+                    <div class="game-description">Match words with their pictures!</div>
+                </div>
+
+                <div class="game-box" onclick="startGame('scramble')">
+                    <div class="game-icon">🔤</div>
+                    <div class="game-title">Word Scramble</div>
+                    <div class="game-description">Unscramble the letters to form words!</div>
+                </div>
+
+                <div class="game-box" onclick="startGame('memory')">
+                    <div class="game-icon">🃏</div>
+                    <div class="game-title">Memory Card Game</div>
+                    <div class="game-description">Find matching pairs of cards!</div>
+                </div>
+            </div>
+
+            <div class="credits">
+                <h3>Students' Project</h3>
+                <p><strong>Created by:</strong></p>
+                <p>Wasayf Al Dawsari • Nouf Al Dawsari • Bayan Al Dawsari</p>
+                <p>Waad Al Dawsari • Wadha Al Hammami • Renad Al Hammami</p>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-selection" class="level-selection">
+            <div class="game-header">
+                <h2 id="level-game-title">Select Difficulty Level</h2>
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            </div>
+            <div class="progress-indicator">
+                🎯 اختر مستوى الصعوبة المناسب لك
+            </div>
+            <div class="level-buttons">
+                <button class="level-btn easy" onclick="selectLevel('easy')">
+                    <div class="level-badge">1</div>
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🌟</div>
+                    <div style="font-size: 1.3rem;">سهل</div>
+                    <div class="level-details">
+                        مثالي للمبتدئين<br>
+                        أسئلة بسيطة وواضحة
+                    </div>
+                    <div class="level-stats">
+                        <span>⏱️ 5 دقائق</span>
+                        <span>📊 أساسي</span>
+                    </div>
+                </button>
+                <button class="level-btn medium" onclick="selectLevel('medium')">
+                    <div class="level-badge">2</div>
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🔥</div>
+                    <div style="font-size: 1.3rem;">متوسط</div>
+                    <div class="level-details">
+                        للطلاب المتقدمين<br>
+                        تحدي أكبر ومفردات أكثر
+                    </div>
+                    <div class="level-stats">
+                        <span>⏱️ 8 دقائق</span>
+                        <span>📊 متقدم</span>
+                    </div>
+                </button>
+                <button class="level-btn hard" onclick="selectLevel('hard')">
+                    <div class="level-badge">3</div>
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🏆</div>
+                    <div style="font-size: 1.3rem;">صعب</div>
+                    <div class="level-details">
+                        للخبراء والمتميزين<br>
+                        تحدي حقيقي ومفردات معقدة
+                    </div>
+                    <div class="level-stats">
+                        <span>⏱️ 12 دقيقة</span>
+                        <span>📊 خبير</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Game -->
+        <div id="quiz-screen" class="game-screen">
+            <div class="game-header">
+                <h2>Multiple Choice Quiz</h2>
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            </div>
+            <div class="score-display">Question <span id="quiz-current">1</span> of <span id="quiz-total">5</span> | Score: <span id="quiz-score">0</span>/<span id="quiz-total-score">5</span></div>
+            <div class="question-container">
+                <div class="question-image" id="quiz-image">🍎</div>
+                <div class="options-grid" id="quiz-options"></div>
+            </div>
+            <div id="quiz-final" style="display: none;"></div>
+        </div>
+
+        <!-- Matching Game -->
+        <div id="matching-screen" class="game-screen">
+            <div class="game-header">
+                <h2>Matching Game</h2>
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            </div>
+            <div class="score-display">Matches: <span id="matching-score">0</span>/10</div>
+            <div class="matching-container">
+                <div class="words-column">
+                    <div class="column-header">📝 Words</div>
+                    <div id="words-list"></div>
+                </div>
+                <div class="images-column">
+                    <div class="column-header">🖼️ Pictures</div>
+                    <div id="images-list"></div>
+                </div>
+            </div>
+            <div id="matching-final" style="display: none;"></div>
+        </div>
+
+        <!-- Word Scramble Game -->
+        <div id="scramble-screen" class="game-screen">
+            <div class="game-header">
+                <h2>Word Scramble</h2>
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            </div>
+            <div class="score-display">Word <span id="scramble-current">1</span> of <span id="scramble-total">4</span> | Score: <span id="scramble-score">0</span>/<span id="scramble-total-score">4</span></div>
+            <div class="scramble-container">
+                <div class="scrambled-word" id="scrambled-display"></div>
+                <input type="text" class="word-input" id="word-input" placeholder="Type the correct word here...">
+                <button class="submit-btn" onclick="checkScrambleAnswer()">Submit Answer</button>
+                <div id="scramble-result"></div>
+                <button class="next-btn" id="scramble-next" onclick="nextScrambleWord()" style="display: none;">Next Word</button>
+            </div>
+            <div id="scramble-final" style="display: none;"></div>
+        </div>
+
+        <!-- Memory Card Game -->
+        <div id="memory-screen" class="game-screen">
+            <div class="game-header">
+                <h2>Memory Card Game</h2>
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+            </div>
+            <div class="score-display">Pairs Found: <span id="memory-score">0</span>/10 | Attempts: <span id="memory-attempts">0</span></div>
+            <div class="memory-grid" id="memory-grid"></div>
+            <div id="memory-final" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Game data with three levels - More educational and progressive
+        const quizData = {
+            easy: [
+                { image: '🍎', options: ['Apple', 'Orange'], correct: 0 },
+                { image: '🐱', options: ['Dog', 'Cat'], correct: 1 },
+                { image: '🚗', options: ['Car', 'Bus'], correct: 0 },
+                { image: '🌞', options: ['Moon', 'Sun'], correct: 1 },
+                { image: '📚', options: ['Book', 'Ball'], correct: 0 },
+                { image: '🏠', options: ['Tree', 'House'], correct: 1 },
+                { image: '🌸', options: ['Flower', 'Fish'], correct: 0 }
+            ],
+            medium: [
+                { image: '🦋', options: ['Butterfly', 'Bee', 'Bird'], correct: 0 },
+                { image: '🌈', options: ['Cloud', 'Rainbow', 'Rain'], correct: 1 },
+                { image: '🎸', options: ['Piano', 'Drum', 'Guitar'], correct: 2 },
+                { image: '🏔️', options: ['Mountain', 'River', 'Forest'], correct: 0 },
+                { image: '🚁', options: ['Car', 'Helicopter', 'Boat'], correct: 1 },
+                { image: '🎭', options: ['Book', 'Music', 'Theater'], correct: 2 },
+                { image: '🌺', options: ['Hibiscus', 'Rose', 'Tulip'], correct: 0 },
+                { image: '🦅', options: ['Duck', 'Eagle', 'Chicken'], correct: 1 }
+            ],
+            hard: [
+                { image: '🔬', options: ['Telescope', 'Microscope', 'Calculator', 'Computer'], correct: 1 },
+                { image: '🏛️', options: ['Museum', 'Library', 'School', 'Hospital'], correct: 0 },
+                { image: '🌋', options: ['Mountain', 'Volcano', 'Hill', 'Valley'], correct: 1 },
+                { image: '🎼', options: ['Poetry', 'Painting', 'Music', 'Dancing'], correct: 2 },
+                { image: '🦕', options: ['Elephant', 'Giraffe', 'Dinosaur', 'Lion'], correct: 2 },
+                { image: '🌌', options: ['Ocean', 'Forest', 'Desert', 'Galaxy'], correct: 3 },
+                { image: '⚗️', options: ['Chemistry', 'Physics', 'Biology', 'Mathematics'], correct: 0 },
+                { image: '🏺', options: ['Vase', 'Cup', 'Plate', 'Bowl'], correct: 0 },
+                { image: '🎨', options: ['Music', 'Art', 'Sports', 'Science'], correct: 1 },
+                { image: '🌿', options: ['Rock', 'Water', 'Plant', 'Fire'], correct: 2 }
+            ]
+        };
+
+        const matchingData = {
+            easy: [
+                { word: 'Cat', image: '🐱' },
+                { word: 'Dog', image: '🐕' },
+                { word: 'Sun', image: '🌞' },
+                { word: 'Car', image: '🚗' },
+                { word: 'House', image: '🏠' }
+            ],
+            medium: [
+                { word: 'Butterfly', image: '🦋' },
+                { word: 'Rainbow', image: '🌈' },
+                { word: 'Guitar', image: '🎸' },
+                { word: 'Mountain', image: '🏔️' },
+                { word: 'Helicopter', image: '🚁' },
+                { word: 'Theater', image: '🎭' },
+                { word: 'Eagle', image: '🦅' }
+            ],
+            hard: [
+                { word: 'Microscope', image: '🔬' },
+                { word: 'Museum', image: '🏛️' },
+                { word: 'Volcano', image: '🌋' },
+                { word: 'Music', image: '🎼' },
+                { word: 'Dinosaur', image: '🦕' },
+                { word: 'Galaxy', image: '🌌' },
+                { word: 'Chemistry', image: '⚗️' },
+                { word: 'Art', image: '🎨' },
+                { word: 'Plant', image: '🌿' }
+            ]
+        };
+
+        const scrambleWords = {
+            easy: [
+                { word: 'CAT', scrambled: 'TAC' },
+                { word: 'DOG', scrambled: 'GOD' },
+                { word: 'SUN', scrambled: 'NUS' },
+                { word: 'CAR', scrambled: 'RAC' },
+                { word: 'BOOK', scrambled: 'KOOB' }
+            ],
+            medium: [
+                { word: 'HAPPY', scrambled: 'PPYHA' },
+                { word: 'SMILE', scrambled: 'LIMES' },
+                { word: 'FRIEND', scrambled: 'DERFIN' },
+                { word: 'SCHOOL', scrambled: 'LOOHCS' },
+                { word: 'FAMILY', scrambled: 'LYIMAF' },
+                { word: 'GARDEN', scrambled: 'NEDRAG' },
+                { word: 'GUITAR', scrambled: 'RATIUG' }
+            ],
+            hard: [
+                { word: 'BUTTERFLY', scrambled: 'FLYTERTUB' },
+                { word: 'RAINBOW', scrambled: 'WOBIARN' },
+                { word: 'MICROSCOPE', scrambled: 'EPOCSORCIM' },
+                { word: 'VOLCANO', scrambled: 'ONACLOV' },
+                { word: 'DINOSAUR', scrambled: 'RUASONID' },
+                { word: 'GALAXY', scrambled: 'YXALAG' },
+                { word: 'CHEMISTRY', scrambled: 'YRTSIEMHC' },
+                { word: 'ADVENTURE', scrambled: 'RUTNEDVA' },
+                { word: 'BEAUTIFUL', scrambled: 'LUFITUABE' }
+            ]
+        };
+
+        const memoryCards = {
+            easy: ['🍎', '🐱', '🚗', '🌞'],
+            medium: ['🍎', '🐱', '🚗', '🌞', '📚', '🏠'],
+            hard: ['🍎', '🐱', '🚗', '🌞', '📚', '🏠', '🌸', '⚽', '🎂', '🌊']
+        };
+
+        // Game state
+        let currentGame = '';
+        let currentLevel = 'easy';
+        let quizCurrentQuestion = 0;
+        let quizScore = 0;
+        let matchingScore = 0;
+        let selectedWord = null;
+        let scrambleCurrentWord = 0;
+        let scrambleScore = 0;
+        let memoryScore = 0;
+        let memoryAttempts = 0;
+        let flippedCards = [];
+        let memoryGameCards = [];
+        let currentQuizData = [];
+        let currentMatchingData = [];
+        let currentScrambleData = [];
+        let currentMemoryCards = [];
+
+        function startGame(gameType) {
+            document.getElementById('main-screen').style.display = 'none';
+            currentGame = gameType;
+            
+            // Show level selection screen
+            document.getElementById('level-selection').style.display = 'block';
+            
+            // Update title based on game type
+            const titles = {
+                'quiz': 'Multiple Choice Quiz - Select Level',
+                'matching': 'Matching Game - Select Level',
+                'scramble': 'Word Scramble - Select Level',
+                'memory': 'Memory Card Game - Select Level'
+            };
+            document.getElementById('level-game-title').textContent = titles[gameType];
+        }
+
+        function selectLevel(level) {
+            currentLevel = level;
+            document.getElementById('level-selection').style.display = 'none';
+            
+            // Set current data based on level
+            currentQuizData = quizData[level];
+            currentMatchingData = matchingData[level];
+            currentScrambleData = scrambleWords[level];
+            currentMemoryCards = memoryCards[level];
+            
+            // Start the selected game
+            if (currentGame === 'quiz') {
+                startQuiz();
+            } else if (currentGame === 'matching') {
+                startMatching();
+            } else if (currentGame === 'scramble') {
+                startScramble();
+            } else if (currentGame === 'memory') {
+                startMemory();
+            }
+        }
+
+        function goHome() {
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById('level-selection').style.display = 'none';
+            document.getElementById('main-screen').style.display = 'block';
+            resetGames();
+        }
+
+        function resetGames() {
+            quizCurrentQuestion = 0;
+            quizScore = 0;
+            matchingScore = 0;
+            selectedWord = null;
+            scrambleCurrentWord = 0;
+            scrambleScore = 0;
+            memoryScore = 0;
+            memoryAttempts = 0;
+            flippedCards = [];
+        }
+
+        // Quiz Game Functions
+        function startQuiz() {
+            document.getElementById('quiz-screen').style.display = 'block';
+            quizCurrentQuestion = 0;
+            quizScore = 0;
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            if (quizCurrentQuestion >= currentQuizData.length) {
+                showQuizFinal();
+                return;
+            }
+
+            const question = currentQuizData[quizCurrentQuestion];
+            document.getElementById('quiz-current').textContent = quizCurrentQuestion + 1;
+            document.getElementById('quiz-total').textContent = currentQuizData.length;
+            document.getElementById('quiz-score').textContent = quizScore;
+            document.getElementById('quiz-total-score').textContent = currentQuizData.length;
+            document.getElementById('quiz-image').textContent = question.image;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            // Adjust grid columns based on number of options
+            if (question.options.length === 2) {
+                optionsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            } else if (question.options.length === 3) {
+                optionsContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            } else {
+                optionsContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            }
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.onclick = () => selectQuizAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('quiz-final').style.display = 'none';
+        }
+
+        function selectQuizAnswer(selectedIndex) {
+            const question = currentQuizData[quizCurrentQuestion];
+            const buttons = document.querySelectorAll('#quiz-options .option-btn');
+            
+            buttons.forEach((button, index) => {
+                button.disabled = true;
+                if (index === question.correct) {
+                    button.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                quizScore++;
+            }
+
+            setTimeout(() => {
+                quizCurrentQuestion++;
+                showQuizQuestion();
+            }, 1500);
+        }
+
+        function showQuizFinal() {
+            const totalQuestions = currentQuizData.length;
+            const levelNames = { easy: 'سهل', medium: 'متوسط', hard: 'صعب' };
+            const percentage = Math.round((quizScore / totalQuestions) * 100);
+            let stars = '';
+            let message = '';
+            
+            if (percentage >= 80) {
+                stars = '⭐⭐⭐';
+                message = 'ممتاز! أداء رائع جداً!';
+            } else if (percentage >= 60) {
+                stars = '⭐⭐';
+                message = 'جيد جداً! استمر في التقدم!';
+            } else {
+                stars = '⭐';
+                message = 'جيد! تحتاج للمزيد من التدريب!';
+            }
+            
+            document.getElementById('quiz-final').innerHTML = `
+                <div class="final-score">
+                    <h2>🎉 اكتمل اختبار المستوى ${levelNames[currentLevel]}! 🎉</h2>
+                    <div style="font-size: 3rem; margin: 20px 0;">${stars}</div>
+                    <p style="font-size: 1.5rem;">نتيجتك: ${quizScore}/${totalQuestions} (${percentage}%)</p>
+                    <p style="font-size: 1.2rem; margin-top: 15px;">${message}</p>
+                    ${percentage >= 80 ? '<p style="color: #86efac; font-weight: bold;">🏆 تستحق الانتقال للمستوى التالي!</p>' : ''}
+                </div>
+            `;
+            document.getElementById('quiz-final').style.display = 'block';
+        }
+
+        // Matching Game Functions
+        function startMatching() {
+            document.getElementById('matching-screen').style.display = 'block';
+            matchingScore = 0;
+            selectedWord = null;
+            setupMatching();
+        }
+
+        function setupMatching() {
+            const wordsList = document.getElementById('words-list');
+            const imagesList = document.getElementById('images-list');
+            
+            wordsList.innerHTML = '';
+            imagesList.innerHTML = '';
+            
+            // Shuffle arrays
+            const shuffledWords = [...currentMatchingData].sort(() => Math.random() - 0.5);
+            const shuffledImages = [...currentMatchingData].sort(() => Math.random() - 0.5);
+            
+            shuffledWords.forEach((item, index) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-item';
+                wordDiv.textContent = item.word;
+                wordDiv.onclick = () => selectWord(item.word, wordDiv);
+                wordsList.appendChild(wordDiv);
+            });
+            
+            shuffledImages.forEach((item, index) => {
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'image-item';
+                imageDiv.textContent = item.image;
+                imageDiv.onclick = () => selectImage(item.word, imageDiv);
+                imagesList.appendChild(imageDiv);
+            });
+        }
+
+        function selectWord(word, element) {
+            if (element.classList.contains('matched')) return;
+            
+            document.querySelectorAll('.word-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            selectedWord = word;
+            element.classList.add('selected');
+        }
+
+        function selectImage(word, element) {
+            if (element.classList.contains('matched') || !selectedWord) return;
+            
+            if (selectedWord === word) {
+                // Correct match
+                element.classList.add('matched');
+                document.querySelector(`.word-item.selected`).classList.add('matched');
+                matchingScore++;
+                document.getElementById('matching-score').textContent = matchingScore;
+                selectedWord = null;
+                
+                if (matchingScore === currentMatchingData.length) {
+                    setTimeout(showMatchingFinal, 500);
+                }
+            } else {
+                // Wrong match - briefly highlight
+                element.style.background = '#fca5a5';
+                setTimeout(() => {
+                    element.style.background = '#fbb6ce';
+                }, 500);
+            }
+        }
+
+        function showMatchingFinal() {
+            const levelNames = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+            document.getElementById('matching-final').innerHTML = `
+                <div class="final-score">
+                    <h2>🎉 ${levelNames[currentLevel]} Matching Complete! 🎉</h2>
+                    <p>You matched all ${currentMatchingData.length} pairs!</p>
+                    <p>Great job learning new words!</p>
+                </div>
+            `;
+            document.getElementById('matching-final').style.display = 'block';
+        }
+
+        // Word Scramble Functions
+        function startScramble() {
+            document.getElementById('scramble-screen').style.display = 'block';
+            scrambleCurrentWord = 0;
+            scrambleScore = 0;
+            showScrambleWord();
+        }
+
+        function showScrambleWord() {
+            if (scrambleCurrentWord >= currentScrambleData.length) {
+                showScrambleFinal();
+                return;
+            }
+
+            const wordData = currentScrambleData[scrambleCurrentWord];
+            document.getElementById('scramble-current').textContent = scrambleCurrentWord + 1;
+            document.getElementById('scramble-total').textContent = currentScrambleData.length;
+            document.getElementById('scramble-score').textContent = scrambleScore;
+            document.getElementById('scramble-total-score').textContent = currentScrambleData.length;
+            document.getElementById('scrambled-display').textContent = wordData.scrambled;
+            document.getElementById('word-input').value = '';
+            document.getElementById('word-input').disabled = false;
+            document.getElementById('scramble-result').innerHTML = '';
+            document.getElementById('scramble-next').style.display = 'none';
+            document.getElementById('scramble-final').style.display = 'none';
+        }
+
+        function checkScrambleAnswer() {
+            const userAnswer = document.getElementById('word-input').value.toUpperCase().trim();
+            const correctAnswer = currentScrambleData[scrambleCurrentWord].word;
+            const resultDiv = document.getElementById('scramble-result');
+            
+            document.getElementById('word-input').disabled = true;
+            
+            if (userAnswer === correctAnswer) {
+                scrambleScore++;
+                resultDiv.innerHTML = '<div class="result-message correct">✅ Correct! Well done!</div>';
+            } else {
+                resultDiv.innerHTML = `<div class="result-message incorrect">❌ Incorrect. The answer was: ${correctAnswer}</div>`;
+            }
+            
+            document.getElementById('scramble-next').style.display = 'block';
+        }
+
+        function nextScrambleWord() {
+            scrambleCurrentWord++;
+            showScrambleWord();
+        }
+
+        function showScrambleFinal() {
+            const totalWords = currentScrambleData.length;
+            const levelNames = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+            document.getElementById('scramble-final').innerHTML = `
+                <div class="final-score">
+                    <h2>🎉 ${levelNames[currentLevel]} Word Scramble Complete! 🎉</h2>
+                    <p>Your Score: ${scrambleScore}/${totalWords}</p>
+                    <p>${scrambleScore >= Math.ceil(totalWords * 0.7) ? 'Amazing word skills!' : scrambleScore >= Math.ceil(totalWords * 0.5) ? 'Good work!' : 'Keep practicing!'}</p>
+                </div>
+            `;
+            document.getElementById('scramble-final').style.display = 'block';
+        }
+
+        // Memory Card Game Functions
+        function startMemory() {
+            document.getElementById('memory-screen').style.display = 'block';
+            memoryScore = 0;
+            memoryAttempts = 0;
+            flippedCards = [];
+            setupMemoryGame();
+        }
+
+        function setupMemoryGame() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            
+            // Create pairs and shuffle
+            memoryGameCards = [...currentMemoryCards, ...currentMemoryCards].sort(() => Math.random() - 0.5);
+            
+            // Adjust grid layout based on number of cards
+            const totalCards = memoryGameCards.length;
+            if (totalCards === 8) { // Easy: 4 pairs = 8 cards
+                grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+            } else if (totalCards === 12) { // Medium: 6 pairs = 12 cards
+                grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+            } else { // Hard: 10 pairs = 20 cards
+                grid.style.gridTemplateColumns = 'repeat(5, 1fr)';
+            }
+            
+            memoryGameCards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'memory-card';
+                cardElement.textContent = '?';
+                cardElement.onclick = () => flipCard(index, cardElement);
+                cardElement.dataset.value = card;
+                cardElement.dataset.index = index;
+                grid.appendChild(cardElement);
+            });
+            
+            updateMemoryScore();
+        }
+
+        function flipCard(index, element) {
+            if (flippedCards.length >= 2 || element.classList.contains('flipped') || element.classList.contains('matched')) {
+                return;
+            }
+            
+            element.classList.add('flipped');
+            element.textContent = element.dataset.value;
+            flippedCards.push({ index, element });
+            
+            if (flippedCards.length === 2) {
+                memoryAttempts++;
+                setTimeout(checkMemoryMatch, 1000);
+            }
+        }
+
+        function checkMemoryMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.element.dataset.value === card2.element.dataset.value) {
+                // Match found
+                card1.element.classList.add('matched');
+                card2.element.classList.add('matched');
+                memoryScore++;
+                
+                if (memoryScore === currentMemoryCards.length) {
+                    setTimeout(showMemoryFinal, 500);
+                }
+            } else {
+                // No match
+                card1.element.classList.remove('flipped');
+                card2.element.classList.remove('flipped');
+                card1.element.textContent = '?';
+                card2.element.textContent = '?';
+            }
+            
+            flippedCards = [];
+            updateMemoryScore();
+        }
+
+        function updateMemoryScore() {
+            document.getElementById('memory-score').textContent = memoryScore;
+            document.getElementById('memory-attempts').textContent = memoryAttempts;
+        }
+
+        function showMemoryFinal() {
+            const totalPairs = currentMemoryCards.length;
+            const levelNames = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+            const excellentThreshold = Math.ceil(totalPairs * 1.5);
+            const goodThreshold = Math.ceil(totalPairs * 2.5);
+            
+            document.getElementById('memory-final').innerHTML = `
+                <div class="final-score">
+                    <h2>🎉 ${levelNames[currentLevel]} Memory Game Complete! 🎉</h2>
+                    <p>Pairs Found: ${memoryScore}/${totalPairs}</p>
+                    <p>Total Attempts: ${memoryAttempts}</p>
+                    <p>${memoryAttempts <= excellentThreshold ? 'Excellent memory!' : memoryAttempts <= goodThreshold ? 'Good job!' : 'Keep practicing!'}</p>
+                </div>
+            `;
+            document.getElementById('memory-final').style.display = 'block';
+        }
+
+        // Allow Enter key for word scramble
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('word-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !this.disabled) {
+                    checkScrambleAnswer();
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'994ae1df965d78ae',t:'MTc2MTQ5MTQ0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
